@@ -1,0 +1,42 @@
+<div [formGroup]="contractGroup">
+    <div class="form-group">
+        <label>Answers</label>
+        <!--<input type="text" class="form-control" formControlName="name">-->
+    </div>
+
+    <div formArrayName="answers">
+        <div *ngFor="let answer of contractGroup.controls.answers.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+                <span>Answer {{i + 1}}</span>
+                <span class="pe-7s-close-circle pe-3x pe-va pull-right" *ngIf="contractGroup.controls.answers.controls.length > 1" (click)="removeAnswer(i)"></span>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+
+                <!--<email [group]="contractGroup.controls.emails.controls[i]"></email>-->
+
+                <!--//umesto posebno da pisemo <email></email>-->
+                <div class="form-group ">
+                    <label>Answer</label>
+                    <input type="text" class="form-control" formControlName="text"  disabled>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group col-md-4 col-md-offset-3" >
+        <button (click)="addAnswerShortText()" type="button" class="btn btn-wd btn-info">
+            Add another answer
+                                <span class="btn-label">
+                                    <!--<i class="fa fa-plus-square-o"></i>-->
+                                    <!--<i class="fa fa-plus-circle"></i>-->
+                                    <i class="fa fa-plus"></i>
+                                </span>
+
+        </button>
+    </div>
+
+</div>

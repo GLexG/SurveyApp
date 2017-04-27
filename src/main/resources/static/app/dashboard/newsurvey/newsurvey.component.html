@@ -1,0 +1,166 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <!--novalidate (ngSubmit)="save(myForm)"-->
+    <form [formGroup]="trustForm" >
+        <!--<h3>Add Survey</h3>-->
+
+        <div class="card">
+            <div class="form-group">
+                <div class="header">
+                    Survey Name
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" formControlName="name">
+                    <small *ngIf="!trustForm.controls.name.valid" class="text-danger">
+                        Name is required (minimum 5 characters).
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <h3>Survey Date</h3>
+
+        <div class="card">
+            <div class="form-group">
+                <div class="header">
+                    Survey Date
+                </div>
+                <div class="panel-body">
+
+                    <div class="col-md-6" >
+                        <div class="header">
+                            From:
+                        </div>
+                        <input type="date" class="form-control" formControlName="from">
+                    </div>
+
+                    <div class="col-md-6" >
+                        <div class="header">
+                            To:
+                        </div>
+                        <input type="date" class="form-control" formControlName="to">
+                    </div>
+                </div>
+
+                    <!--moj custom date validator-->
+                    <!--<small *ngIf="trustForm.controls.date.dirty && !trustForm.controls.date.valid && trustForm.controls.date.errors.regularDate" class="text-danger">-->
+                        <!--Date is required dd.mm.yyyy!-->
+                    <!--</small>-->
+                <!--</div>-->
+            </div>
+        </div>
+
+        <div class="card margina">
+        <!--questions-->
+        <div formArrayName="questions">
+            <div *ngFor="let question of trustForm.controls.questions.controls; let i=index" class="panel panel-default">
+                <div class="header">
+                    Question {{i + 1}}
+                    <span class="pe-7s-close-circle pe-3x pe-va pull-right" *ngIf="trustForm.controls.questions.controls.length > 1" (click)="removeQuestion(i)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i">
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" formControlName="name">
+                    </div>
+
+
+                    <!--select type of fking question-->
+                    <div class="form-group col-md-4 col-md-offset-3" >
+                        <label class="control-label">Question Type</label>
+                        <select class="form-control" formControlName="qtype"  (change)="onChange($event.target.value)" >
+                            <!--<select class="form-control" formControlName="qtype" (change)="onChange($event.target.value)" >-->
+                            <!--<select class="form-control" formControlName="qtype" (change)="onChange($event.target.value)" #select [(ngModel)]="choice">-->
+                            <option value="number" title="Number">Number</option>
+                            <option value="shorttext" title="Short Text" >Short Text</option>
+                            <option value="longtext" title="Long Text">Long Text</option>
+                            <option value="radio" title="Radio">Radio</option>
+                            <option value="checkbox" title="Checkbox">Checkbox</option>
+                            <option value="matrica1" title="Matrica1">Matrica1</option>
+                            <option value="matrica2" title="Matrica2">Matrica2</option>
+                            <option value="date" title="Date">Date</option>
+                        </select>
+                    </div>
+
+                    <!---------------------------RADI DOHVATANJE TIPA TEST!!!!------------------------------>
+                    <!--<h3>{{ trustForm.get(['contracts', i, 'qtype']).value }}</h3>-->
+
+
+                    <div class="form-group col-md-12" >
+                    <!--<label class="control-label">Answer</label>-->
+                    <div  [ngSwitch]=" trustForm.get(['questions', i, 'qtype']).value ">
+                    <!--<h3 *ngSwitchCase="'shorttext'"><contract [group]="trustForm.controls.questions.controls[i]"></contract></h3>-->
+                        <h3 *ngSwitchCase="'longtext'"><ltextara-cmp [group]="trustForm.controls.questions.controls[i]"></ltextara-cmp></h3>
+                        <h3 *ngSwitchCase="'shorttext'"><stextara-cmp [group]="trustForm.controls.questions.controls[i]"></stextara-cmp></h3>
+                        <h3 *ngSwitchCase="'number'"><number-cmp [group]="trustForm.controls.questions.controls[i]"></number-cmp></h3>
+                        <h3 *ngSwitchCase="'checkbox'"><checkbox-cmp [group]="trustForm.controls.questions.controls[i]"></checkbox-cmp></h3>
+                        <h3 *ngSwitchCase="'radio'"><radio-cmp [group]="trustForm.controls.questions.controls[i]"></radio-cmp></h3>
+                        <h3 *ngSwitchCase="'date'"><date-cmp [group]="trustForm.controls.questions.controls[i]"></date-cmp></h3>
+                        <small *ngSwitchDefault>Select Question Type</small>
+                        <!--<h3 *ngSwitchCase="'shorttext'"><stext-cmp></stext-cmp></h3>-->
+                        <!--<h3 *ngSwitchCase="'longtext'"><ltext-cmp></ltext-cmp></h3>-->
+                        <!--<h3 *ngSwitchCase="'three'">Third</h3>-->
+                        <!--<h3 *ngSwitchDefault>Default</h3>-->
+                    </div>
+                    </div>
+
+                    <!--<contract [group]="trustForm.controls.contracts.controls[i]"></contract>-->
+                    <div class=" form-group col-md-4">
+                        <!--<p class="category">Required</p>-->
+                            <input #cb1 type="checkbox" value="" (change)="logCheckbox(cb1)"> Required
+                    </div>
+
+                    <!--fensi checkbox ne radi!!!!!!-->
+                    <!--<div class=" form-group col-md-4">-->
+                    <!--<div class="switch" data-label-off="OFF" data-label-on="ON" >-->
+                        <!--<input #cb1 type="checkbox"  value="" (change)="logCheckbox(cb1)">-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+            <!--<input type="checkbox"-->
+                   <!--[checked]="user.toggle === toggles[0].value"-->
+                   <!--(change)="$event.target.checked? (user.toggle =  toggles[0].value) : (user.toggle = toggles[1].value)">-->
+            <!--{{ toggles[0].display }}-->
+
+        </div>
+        <div class="margin-20">
+            <!--<button type="reset" >RESET</button>-->
+            <button (click)="addQuestion()" class="btn btn-info btn-fill btn-wd">
+                Add another question +
+            </button>
+        </div>
+
+        <div class=" col-md-12">
+        </div>
+
+        <div class=" form-group col-md-4 col-md-offset-4">
+            <!--<p class="category">Required</p>-->
+
+            <button type="submit" class="btn btn-success btn-lg  btn-fill btn-wd">
+                Submit form
+            </button>
+        </div>
+
+    </form>
+
+                <div class=" control-group col-md-12">
+                    <h5>Details</h5>
+                     <pre>{{ trustForm.value | json }}</pre>
+                </div>
+</div>
+
+
+
+
+        </div>
+    </div>
+</div>
