@@ -42,7 +42,7 @@ export class AllsurveysComponent{
     getData: string;
     postData: string;
 
-    data;
+    surveys_data;
 
     // constructor(private _httpService: AllsurveysService){
     //     this._httpService.getSurveys()
@@ -53,10 +53,21 @@ export class AllsurveysComponent{
     //
     // }
 
+//     constructor(private http:Http) {
+//     this.http.get('http://localhost:8080/api/surveys')
+//         .subscribe(res => this.data = res.json());
+// }
+
+
     constructor(private http:Http) {
         this.http.get('http://localhost:8080/api/surveys')
-            .subscribe(res => this.data = res.json());
+            .subscribe(data => {
+                // Read the result field from the JSON response.
+                //this.data = data['results'];
+                this.surveys_data = data.json();
+        });
     }
+
 
     // constructor(private http:Http) {
     //     this.http.get('http://localhost:8080/api/surveys')

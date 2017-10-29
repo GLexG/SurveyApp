@@ -8,14 +8,14 @@
                 <div class="card">
                     <div class="header text-center">
                         <h4 class="title">Surveys</h4>
-                        <p class="category">A table for content management</p>
+                        <p class="category">A table for survey data</p>
                         <br />
                     </div>
 
                     <div class="content table-responsive table-full-width">
 
                         <!-------------------------moja tabela---------------------->
-                        <datatable [dataset]= data [enableFilter]=true >
+                        <datatable [dataset]= surveys_data [enableFilter]=true >
                             <column [value]="'id'" [header]="'Id'"></column>
                             <column [value]="'title'" [header]="'Title'"></column>
                             <column [value]="'started_at'" [header]="'Started'"></column>

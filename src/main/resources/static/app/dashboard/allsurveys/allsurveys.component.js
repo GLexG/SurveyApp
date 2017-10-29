@@ -23,10 +23,18 @@ let AllsurveysComponent = class AllsurveysComponent {
     //             () => console.log("Zavrseno!"));
     //
     // }
+    //     constructor(private http:Http) {
+    //     this.http.get('http://localhost:8080/api/surveys')
+    //         .subscribe(res => this.data = res.json());
+    // }
     constructor(http) {
         this.http = http;
         this.http.get('http://localhost:8080/api/surveys')
-            .subscribe(res => this.data = res.json());
+            .subscribe(data => {
+            // Read the result field from the JSON response.
+            //this.data = data['results'];
+            this.surveys_data = data.json();
+        });
     }
 };
 AllsurveysComponent = __decorate([
