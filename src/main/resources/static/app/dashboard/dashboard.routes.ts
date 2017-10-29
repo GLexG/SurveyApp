@@ -11,6 +11,11 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { TestComponent } from "./test/test.component";
 import {Test2Component} from "../test2/test2.component";
 import {NewsurveyComponent} from "./newsurvey/newsurvey.component";
+import {AllsurveysComponent} from "./allsurveys/allsurveys.component";
+// import {DatatableComponent} from "./datatable/datatable.component";
+// import {NgxComponent} from "./ngxdatatable/ngx.component";
+
+// import {TableDemoComponent} from "./tabledemo/table-demo";
 
 
 // export const MODULE_ROUTES: Route[] =[
@@ -41,9 +46,12 @@ export const MODULE_ROUTES: Route[] =[
             { path: 'icons', component: IconsComponent },
             { path: 'notifications', component: NotificationsComponent },
             { path: 'typography', component: TypographyComponent },
+            { path: 'allsurveys', component: AllsurveysComponent },
             { path: 'newsurvey', component: NewsurveyComponent },
             { path: 'test', component: TestComponent },
             { path: 'upgrade', component: UpgradeComponent }
+            // { path: 'datatable', component: DatatableComponent }
+            // { path: 'ngxdatatable', component: NgxComponent },
         ]},
 
 ]
@@ -74,5 +82,6 @@ export const MODULE_COMPONENTS = [
     MapsComponent,
     TestComponent,
     // NewsurveyComponent,
+    // DatatableComponent,
     UpgradeComponent
 ]

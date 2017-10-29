@@ -1,57 +1,63 @@
-// app.component.ts
+/**
+ * Created by Leon on 8/29/2017.
+ */
+import { Component, trigger,transition,style,animate,group,state } from '@angular/core';
+import {TestService} from "./test.service";
 
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder,FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { Customer } from './customer.interface';
 
 @Component({
     moduleId: module.id,
-    selector: 'test-root',
+    selector: 'test-cmp',
     templateUrl: 'test.component.html',
-})
-export class TestComponent implements OnInit {
-    public myForm: FormGroup; // our form model
-
-    type: string = "password";
-
-    getType() {
-        return 'checkbox';
-    }
-
-    setType() {
-        this.type = 'password';
-    }
-    // we will use form builder to simplify our syntax
-    constructor(private _fb: FormBuilder) { }
-
-    ngOnInit() {
-        // we will initialize our form here
-        this.myForm = this._fb.group({
-            name: ['', [Validators.required, Validators.minLength(5)]],
-            addresses: this._fb.array([
-                this.initAddress(),
+    //PROVIDER!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    providers: [TestService],
+    //PROVIDER!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    animations: [
+        trigger('cardicons', [
+            state('*', style({
+                '-ms-transform': 'translate3D(0px, 0px, 0px)',
+                '-webkit-transform': 'translate3D(0px, 0px, 0px)',
+                '-moz-transform': 'translate3D(0px, 0px, 0px)',
+                '-o-transform':'translate3D(0px, 0px, 0px)',
+                transform:'translate3D(0px, 0px, 0px)',
+                opacity: 1})),
+            transition('void => *', [
+                style({opacity: 0,
+                    '-ms-transform': 'translate3D(0px, 150px, 0px)',
+                    '-webkit-transform': 'translate3D(0px, 150px, 0px)',
+                    '-moz-transform': 'translate3D(0px, 150px, 0px)',
+                    '-o-transform':'translate3D(0px, 150px, 0px)',
+                    transform:'translate3D(0px, 150px, 0px)',
+                }),
+                animate('0.3s 0s ease-out')
             ])
-        });
+        ])
+    ]
+})
+
+export class TestComponent{
+    getData: string;
+    postData: string;
+
+    constructor(private _httpService: TestService){}
+
+    onTestGet(){
+        this._httpService.getCurrentTime()
+            .subscribe(
+                data => this.getData = JSON.stringify(data),
+                error => alert(error),
+                //kada je request zavrsen ovo radimo
+                () => console.log("Zavrseno!")
+            );
     }
 
-    initAddress() {
-        // initialize our address
-        return this._fb.group({
-            street: ['', Validators.required],
-            postcode: ['']
-        });
-    }
-
-    addAddress() {
-        // add address to the list
-        const control = <FormArray>this.myForm.controls['addresses'];
-        control.push(this.initAddress());
-    }
-
-    removeAddress(i: number) {
-        // remove address from the list
-        const control = <FormArray>this.myForm.controls['addresses'];
-        control.removeAt(i);
+    onTestPost(){
+        this._httpService.postJSON()
+            .subscribe(
+                data => this.postData = JSON.stringify(data),
+                error => alert(error),
+                //kada je request zavrsen ovo radimo
+                () => console.log("Zavrseno!")
+            );
     }
 }

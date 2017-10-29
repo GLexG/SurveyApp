@@ -25,6 +25,7 @@ import {HomeComponent} from "./dashboard/home/home.component";
 import {TableComponent} from "./dashboard/table/table.component";
 import {RegisterComponent} from "./register/register.component";
 import {Test2Component} from "./test2/test2.component";
+import {LoginModule} from "./login/login.module";
 
 
 
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
+        LoginModule,
         BrowserModule,
         DashboardModule,
         SidebarModule,
@@ -59,7 +61,7 @@ const appRoutes: Routes = [
         ])
     ],
 
-    declarations: [ AppComponent ,LoginComponent,RegisterComponent, ErrorComponent],
+    declarations: [ AppComponent ,RegisterComponent, ErrorComponent],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
     bootstrap:    [ AppComponent ]
 })

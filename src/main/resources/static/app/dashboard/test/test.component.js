@@ -1,4 +1,3 @@
-// app.component.ts
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,54 +8,59 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/**
+ * Created by Leon on 8/29/2017.
+ */
 const core_1 = require('@angular/core');
-const forms_1 = require('@angular/forms');
+const test_service_1 = require("./test.service");
 let TestComponent = class TestComponent {
-    // we will use form builder to simplify our syntax
-    constructor(_fb) {
-        this._fb = _fb;
-        this.type = "password";
+    constructor(_httpService) {
+        this._httpService = _httpService;
     }
-    getType() {
-        return 'checkbox';
+    onTestGet() {
+        this._httpService.getCurrentTime()
+            .subscribe(data => this.getData = JSON.stringify(data), error => alert(error), 
+        //kada je request zavrsen ovo radimo
+            () => console.log("Zavrseno!"));
     }
-    setType() {
-        this.type = 'password';
-    }
-    ngOnInit() {
-        // we will initialize our form here
-        this.myForm = this._fb.group({
-            name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            addresses: this._fb.array([
-                this.initAddress(),
-            ])
-        });
-    }
-    initAddress() {
-        // initialize our address
-        return this._fb.group({
-            street: ['', forms_1.Validators.required],
-            postcode: ['']
-        });
-    }
-    addAddress() {
-        // add address to the list
-        const control = this.myForm.controls['addresses'];
-        control.push(this.initAddress());
-    }
-    removeAddress(i) {
-        // remove address from the list
-        const control = this.myForm.controls['addresses'];
-        control.removeAt(i);
+    onTestPost() {
+        this._httpService.postJSON()
+            .subscribe(data => this.postData = JSON.stringify(data), error => alert(error), 
+        //kada je request zavrsen ovo radimo
+            () => console.log("Zavrseno!"));
     }
 };
 TestComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'test-root',
+        selector: 'test-cmp',
         templateUrl: 'test.component.html',
+        //PROVIDER!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        providers: [test_service_1.TestService],
+        //PROVIDER!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        animations: [
+            core_1.trigger('cardicons', [
+                core_1.state('*', core_1.style({
+                    '-ms-transform': 'translate3D(0px, 0px, 0px)',
+                    '-webkit-transform': 'translate3D(0px, 0px, 0px)',
+                    '-moz-transform': 'translate3D(0px, 0px, 0px)',
+                    '-o-transform': 'translate3D(0px, 0px, 0px)',
+                    transform: 'translate3D(0px, 0px, 0px)',
+                    opacity: 1 })),
+                core_1.transition('void => *', [
+                    core_1.style({ opacity: 0,
+                        '-ms-transform': 'translate3D(0px, 150px, 0px)',
+                        '-webkit-transform': 'translate3D(0px, 150px, 0px)',
+                        '-moz-transform': 'translate3D(0px, 150px, 0px)',
+                        '-o-transform': 'translate3D(0px, 150px, 0px)',
+                        transform: 'translate3D(0px, 150px, 0px)',
+                    }),
+                    core_1.animate('0.3s 0s ease-out')
+                ])
+            ])
+        ]
     }), 
-    __metadata('design:paramtypes', [forms_1.FormBuilder])
+    __metadata('design:paramtypes', [test_service_1.TestService])
 ], TestComponent);
 exports.TestComponent = TestComponent;
 //# sourceMappingURL=test.component.js.map

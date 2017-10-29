@@ -27,6 +27,7 @@ const forms_1 = require("@angular/forms");
 const error_component_1 = require("./error/error.component");
 const register_component_1 = require("./register/register.component");
 const test2_component_1 = require("./test2/test2.component");
+const login_module_1 = require("./login/login.module");
 const appRoutes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: login_component_1.LoginComponent },
@@ -39,6 +40,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [
+            login_module_1.LoginModule,
             platform_browser_1.BrowserModule,
             dashboard_module_1.DashboardModule,
             sidebar_module_1.SidebarModule,
@@ -57,7 +59,7 @@ AppModule = __decorate([
                 { path: '**', component: error_component_1.ErrorComponent }
             ])
         ],
-        declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, register_component_1.RegisterComponent, error_component_1.ErrorComponent],
+        declarations: [app_component_1.AppComponent, register_component_1.RegisterComponent, error_component_1.ErrorComponent],
         providers: [{ provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }],
         bootstrap: [app_component_1.AppComponent]
     }), 

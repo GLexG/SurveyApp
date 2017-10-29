@@ -10,6 +10,10 @@ const maps_component_1 = require('./maps/maps.component');
 const upgrade_component_1 = require('./upgrade/upgrade.component');
 const test_component_1 = require("./test/test.component");
 const newsurvey_component_1 = require("./newsurvey/newsurvey.component");
+const allsurveys_component_1 = require("./allsurveys/allsurveys.component");
+// import {DatatableComponent} from "./datatable/datatable.component";
+// import {NgxComponent} from "./ngxdatatable/ngx.component";
+// import {TableDemoComponent} from "./tabledemo/table-demo";
 // export const MODULE_ROUTES: Route[] =[
 //     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 //     { path: 'dashboard', component: HomeComponent },
@@ -36,6 +40,7 @@ exports.MODULE_ROUTES = [
             { path: 'icons', component: icons_component_1.IconsComponent },
             { path: 'notifications', component: notifications_component_1.NotificationsComponent },
             { path: 'typography', component: typography_component_1.TypographyComponent },
+            { path: 'allsurveys', component: allsurveys_component_1.AllsurveysComponent },
             { path: 'newsurvey', component: newsurvey_component_1.NewsurveyComponent },
             { path: 'test', component: test_component_1.TestComponent },
             { path: 'upgrade', component: upgrade_component_1.UpgradeComponent }
@@ -67,6 +72,7 @@ exports.MODULE_COMPONENTS = [
     maps_component_1.MapsComponent,
     test_component_1.TestComponent,
     // NewsurveyComponent,
+    // DatatableComponent,
     upgrade_component_1.UpgradeComponent
 ];
 //# sourceMappingURL=dashboard.routes.js.map

@@ -18,12 +18,14 @@ const forms_1 = require("@angular/forms");
 // import {TestModule} from "./test/test.module";
 const common_1 = require("@angular/common");
 const newsurvey_module_1 = require("./newsurvey/newsurvey.module");
+const allsurveys_module_1 = require("./allsurveys/allsurveys.module");
 let DashboardModule = class DashboardModule {
 };
 DashboardModule = __decorate([
     core_1.NgModule({
         imports: [
             newsurvey_module_1.NewsurveyModule,
+            allsurveys_module_1.AllsurveysModule,
             common_1.CommonModule,
             sidebar_module_1.SidebarModule,
             navbar_module_1.NavbarModule,

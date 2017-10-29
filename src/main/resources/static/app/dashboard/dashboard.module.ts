@@ -21,10 +21,12 @@ import {CommonModule} from "@angular/common";
 import {Test2Module} from "../test2/test2.module";
 
 import {NewsurveyModule} from "./newsurvey/newsurvey.module";
+import {AllsurveysModule} from "./allsurveys/allsurveys.module";
 
 @NgModule({
     imports: [
         NewsurveyModule,
+        AllsurveysModule,
         CommonModule,
         SidebarModule,
         NavbarModule,
